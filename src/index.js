@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Routes from 'src/routes';
+import Routes from './routes';
 
 import { CurrentUserProvider } from './contexts/currentUser';
 import CurrentUserChecker from './components/currentUserChecker';

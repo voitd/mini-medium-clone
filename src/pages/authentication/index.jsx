@@ -8,15 +8,15 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 
 const Authentication = props => {
   const routes = {
-    users: 'api/users',
-    login: 'api/users/login'
+    users: '/user',
+    login: '/users/login'
   };
 
   const isLogin = props.match.path === '/login';
   const pageTitle = isLogin ? 'Sign in' : 'Sign up';
   const descriptionLink = isLogin ? '/register' : '/login';
   const descriptionText = isLogin ? 'Need an account?' : 'Have an account?';
-  const apiUrl = isLogin ? routes.login : routes.users;
+  const apiUrl = isLogin ? routes.login : routes.user;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -25,8 +25,6 @@ const Authentication = props => {
   const [, setToken] = useLocalStorage('token');
   const [, setCurrentUserState] = useContext(CurrentUserContext);
 
-
-
   const handelSubmit = e => {
     e.preventDefault();
     const user = isLogin ? { email, password } : { email, password, username };
@@ -34,14 +32,16 @@ const Authentication = props => {
   };
 
   useEffect(() => {
-    if (!response) return;
+    if (!response) {
+      return;
+    }
     setToken(response.user.token);
     setIsSuccessfullSubmit(true);
     setCurrentUserState(state => ({
       ...state,
       isLoggedIn: true,
       isLoading: false,
-      curretUser: response.user
+      currentUser: response.user
     }));
   }, [response, setCurrentUserState, setToken]);
 
