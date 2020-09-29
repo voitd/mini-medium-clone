@@ -7,6 +7,7 @@ const Feed = ({ articles }) => {
       {articles.map((article, index) => {
         const { createdAt, slug, title, author, description, tagList } = article;
         const { username, image } = author;
+
         return (
           <div className="article-preview" key={index}>
             <div className="article-meta">
@@ -23,10 +24,14 @@ const Feed = ({ articles }) => {
             <Link to={`/articles/${slug}`} className="preview-link">
               <h1>{title}</h1>
               <p>{description}</p>
-							<span>Read maore...</span>
-							<ul className='tag-list'>
-								{tagList.map(tag => (<li key={tag} className="tag-default tag-pill tag-outline">{tag}</li>))}
-							</ul>
+              <span>Read maore...</span>
+              <ul className="tag-list">
+                {tagList.map(tag => (
+                  <li key={tag} className="tag-default tag-pill tag-outline">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </Link>
           </div>
         );

@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
-import useFetch from '../../hooks/useFetch';
-import Feed from '../../components/feed';
+import { stringify } from 'query-string';
+import React, { useEffect, Fragment } from 'react';
 
-const GlobalFeed = () => {
-  const apiUrl = '/articles?limit=10&offset=0';
-  const [{ response, isLoading, error }, doFetch] = useFetch(apiUrl);
+import { getPaginator, limit } from '../../utils';
+import Feed from '../../components/feed';
+import Pagination from '../../components/pagination';
+import useFetch from '../../hooks/useFetch';
+
+const GlobalFeed = ({ location, match }) => {
+  const { offset, currentPage } = getPaginator(location.search);
+  const stringifyParams = stringify({
+    limit,
+    offset
+  });
+  const url = match.url;
+  const apiUrl = '/articles?';
+  const [{ response, isLoading, error }, doFetch] = useFetch(apiUrl + stringifyParams);
 
   useEffect(() => {
     doFetch();
-  }, [doFetch]);
+  }, [doFetch, currentPage]);
 
   return (
     <div className="home-page">
@@ -23,7 +33,17 @@ const GlobalFeed = () => {
           <div className="col-md-9">
             {isLoading && <div>Loading...</div>}
             {error && <div>Some error hapenned</div>}
-            {!isLoading && response && <Feed articles={response.articles} />}
+            {!isLoading && response && (
+              <Fragment>
+                <Feed articles={response.articles} />
+                <Pagination
+                  total={response.articlesCount}
+                  limit={limit}
+                  url={url}
+                  currentPage={currentPage}
+                />
+              </Fragment>
+            )}
           </div>
           <div className="col-md-3">Popular tags</div>
         </div>
