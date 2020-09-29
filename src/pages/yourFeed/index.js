@@ -10,15 +10,16 @@ import Pagination from '../../components/pagination';
 import PopularTags from '../../components/popularTags';
 import useFetch from '../../hooks/useFetch';
 
-const GlobalFeed = ({ location, match }) => {
+const FEED_API_URL = '/articles/feed?';
+
+const YourFeed = ({ location, match }) => {
   const { offset, currentPage } = getPaginator(location.search);
-  const url = match.url;
   const stringifyParams = stringify({
     limit,
     offset
   });
-  const ARCTICLES_API_URL = '/articles?';
-  const [{ response, isLoading, error }, doFetch] = useFetch(ARCTICLES_API_URL + stringifyParams);
+  const url = match.url;
+  const [{ response, isLoading, error }, doFetch] = useFetch(FEED_API_URL + stringifyParams);
 
   useEffect(() => {
     doFetch();
@@ -35,7 +36,7 @@ const GlobalFeed = ({ location, match }) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
-            <FeedToggler />
+            <FeedToggler tagName="foo" />
             {isLoading && <Loading />}
             {error && <ErrorMessage />}
             {!isLoading && response && (
@@ -59,4 +60,4 @@ const GlobalFeed = ({ location, match }) => {
   );
 };
 
-export default GlobalFeed;
+export default YourFeed;
