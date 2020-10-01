@@ -3,9 +3,9 @@ import axios from 'axios';
 
 import useLocalStorage from './useLocalStorage';
 
-const API_ROOT = 'https://conduit.productionready.io/api';
 
 export default url => {
+  const API_ROOT = 'https://conduit.productionready.io/api';
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
