@@ -26,6 +26,7 @@ const Feed = ({ articles }) => {
               <h1>{title}</h1>
               <p>{description}</p>
               <span>Read more...</span>
+              <TagList tags={tagList} />
             </Link>
           </div>
         );
