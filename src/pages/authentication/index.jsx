@@ -2,7 +2,7 @@ import { Link, Redirect } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
 
 import { CurrentUserContext } from '../../contexts/currentUser';
-import BackendErrorMessages from './BackendErrorMessages';
+import BackendErrorMessages from '../../components/BackendErrorMessages';
 import useFetch from '../../hooks/useFetch';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
