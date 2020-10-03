@@ -10,6 +10,7 @@ const CreateArticle = () => {
   const [{ response, error }, doFetch] = useFetch(ARTICLE_API_URL);
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false);
   const [currentUserState] = useContext(CurrentUserContext);
+  console.log("currentUserState -> ", currentUserState)
 
   const initialValues = {
     title: '',
@@ -43,7 +44,7 @@ const CreateArticle = () => {
   };
 
   return (
-    <div>
+      <div>
       <ArticleForm
         errors={(error && error.errors) || {}}
         initialValues={initialValues}
