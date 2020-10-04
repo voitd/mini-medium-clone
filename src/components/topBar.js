@@ -5,7 +5,6 @@ import { CurrentUserContext } from '../contexts/currentUser';
 const TopBar = () => {
   const [currentUserState] = useContext(CurrentUserContext);
   const { isLoggedIn, currentUser } = currentUserState;
-  const { username, image } = currentUser;
 
   return (
     <nav className="navbar navbar-light">
@@ -43,9 +42,15 @@ const TopBar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to={`/profiles/${username}`} className="nav-link">
-                  <img className="user-pic" src={image} alt={username} />
-                  &nbsp; {username}
+                <NavLink to="/settings" className="nav-link">
+                  <i className="ion-gear-a"></i>
+                  &nbsp; Settings
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to={`/profiles/${currentUser.username}`} className="nav-link">
+                  <img className="user-pic" src={currentUser.image} alt={currentUser.username} />
+                  &nbsp; {currentUser.username}
                 </NavLink>
               </li>
             </Fragment>

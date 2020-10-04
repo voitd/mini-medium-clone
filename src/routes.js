@@ -8,6 +8,7 @@ import GlobalFeed from './pages/globalFeed';
 import TagFeed from './pages/tagFeed';
 import YourFeed from './pages/yourFeed';
 import EditArticle from './pages/editArticle';
+import Settings from './pages/settings';
 
 export default () => {
   return (
@@ -16,6 +17,7 @@ export default () => {
       <Route path="/feed" component={YourFeed} />
       <Route path="/tags/:slug" component={TagFeed} />
       <Route path="/login" component={Authentication} />
+      <Route path="/settings" component={Settings} />
       <Route path="/register" component={Authentication} />
       <Route path="/articles/new" component={CreateArticle} />
       <Route path="/articles/:slug/edit" component={EditArticle} />
