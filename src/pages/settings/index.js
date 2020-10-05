@@ -7,7 +7,6 @@ import useFetch from '../../hooks/useFetch';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const Settings = () => {
-  const SETTINGS_API_URL = '/settings';
   const USER_API_URL = '/user';
   const [currentUserState, dispatch] = useContext(CurrentUserContext);
   const [{ response, error }, doFetch] = useFetch(USER_API_URL);
