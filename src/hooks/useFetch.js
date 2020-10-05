@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import useLocalStorage from './useLocalStorage';
 
-
 export default url => {
   const API_ROOT = 'https://conduit.productionready.io/api';
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +17,11 @@ export default url => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
+    if (!isLoading) {
+      return;
+    }
+
+    let skipGetResponceAfterDestroy = false;
 
     const requestOptions = {
       ...options,
@@ -27,15 +30,21 @@ export default url => {
 
     axios(`${API_ROOT}${url}`, requestOptions)
       .then(({ data }) => {
-        setResponse(data);
+        if (!skipGetResponceAfterDestroy) {
+          setIsLoading(false);
+          setResponse(data);
+        }
       })
       .catch(({ response }) => {
         const { data } = response;
-        setError(data);
-      })
-      .finally(res => {
-        setIsLoading(false);
+        if (!skipGetResponceAfterDestroy) {
+          setIsLoading(false);
+          setError(data);
+        }
       });
+    return () => {
+      skipGetResponceAfterDestroy = true;
+    };
   }, [isLoading, options, token, url]);
 
   return [{ isLoading, response, error }, doFetch];
