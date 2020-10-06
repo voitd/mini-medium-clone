@@ -8,7 +8,7 @@ start-frontend:
 	yarn start --hot
 
 install:
-	npm install
+	yarn install
 
 build:
 	rm -rf build
