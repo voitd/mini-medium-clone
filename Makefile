@@ -1,23 +1,17 @@
-install:
-	install-deps
-
 start:
 	heroku local -f Procfile.dev
+
+start-back-end:
+	node server.js	
 
 start-frontend:
 	yarn start --hot
 
-install-deps:
+install:
 	npm install
 
 build:
-	rm -rf dist
-
-test:
-	npm test -s
-
-test-coverage:
-	npm test -- --coverage
+	rm -rf build
 
 lint:
 	npx eslint . --ext js,jsx
