@@ -1,7 +1,7 @@
 start:
 	heroku local -f Procfile.dev
 
-start-back-end:
+start-backend:
 	node server.js	
 
 start-frontend:
